@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Electra AI - Knowledge Assistant</title>
+    <style>
+        /* General Styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html, body {
+            font-family: 'Arial', sans-serif;
+            background: #1e1e1e;
+            color: white;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        /* Header */
+        #header {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background: #2a2a2a;
+        }
+        #logo {
+            display: flex;
+            align-items: center;
+        }
+        #logo img {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        #menu {
+            font-size: 24px;
+            cursor: pointer;
+        }
+        /* Chatbox */
+        #chatbox {
+            width: 90%;
+            max-width: 700px;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 10px;
+            background: #2a2a2a;
+            height: 65vh;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            scrollbar-width: none;
+        }
+        .message {
+            padding: 10px;
+            margin: 5px;
+            border-radius: 20px;
+            max-width: 75%;
+            word-wrap: break-word;
+            white-space: pre-wrap;
+            overflow-wrap: break-word;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+        }
+        .user {
+            background: #007aff;
+            color: white;
+            align-self: flex-end;
+            text-align: right;
+        }
+        .bot {
+            background: #444;
+            color: white;
+            align-self: flex-start;
+            text-align: left;
+            display: flex;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            word-break: break-word;
+            max-width: 75%;
+        }
+        .bot img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        /* Typing Animation */
+        .typing {
+            display: flex;
+            align-items: center;
+        }
+        .typing span {
+            width: 8px;
+            height: 8px;
+            margin: 0 2px;
+            background-color: white;
+            border-radius: 50%;
+            display: inline-block;
+            animation: typingAnimation 1.5s infinite;
+        }
+        .typing span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        .typing span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+        @keyframes typingAnimation {
+            0% { opacity: 0.3; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1); }
+            100% { opacity: 0.3; transform: scale(0.8); }
+        }
+        /* Input Section */
+        #inputContainer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            width: 90%;
+            max-width: 700px;
+            padding: 5px;
+        }
+        #userInput {
+            flex: 1;
+            padding: 8px; /* Smaller padding */
+            border: none;
+            border-radius: 10px; /* Slightly reduced border radius */
+            outline: none;
+            font-size: 14px; /* Smaller font */
+            background: #333;
+            color: white;
+            height: 30px; /* Reduced height */
+        }
+        select {
+            padding: 6px;
+            border-radius: 5px;
+            border: none;
+            font-size: 12px;
+            background: #333;
+            color: white;
+            width: 80px;
+        }
+        button {
+            padding: 8px 12px; /* Adjusted padding */
+            border: none;
+            background: #007aff;
+            color: white;
+            font-size: 14px;
+            border-radius: 15px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #005bb5;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="header">
+        <div id="logo">
+            <img src="logo.png" alt="Electra AI Logo">
+            <h2>Electra AI</h2>
+        </div>
+       
+    </div>
+
+    <div id="chatbox"></div>
+    
+    <div id="inputContainer">
+        <input type="text" id="userInput" placeholder="Ask anything...">
+        <select id="languageSelect">
+            <option value="English">English</option>
+            <option value="Bengali">বাংলা</option>
+            <option value="Hindi">हिन्दी</option>
+            <option value="German">Deutsch</option>
+            <option value="French">Français</option>
+        </select>
+        <button onclick="sendMessage()">Send</button>
+    </div>
+
+    <script>
+        async function sendMessage() {
+            let userMessage = document.getElementById("userInput").value;
+            if (!userMessage) return;
+
+            let chatbox = document.getElementById("chatbox");
+            let selectedLanguage = document.getElementById("languageSelect").value;
+
+            // Add user message
+            let userBubble = document.createElement("div");
+            userBubble.classList.add("message", "user");
+            userBubble.innerHTML = userMessage;
+            chatbox.appendChild(userBubble);
+            chatbox.scrollTop = chatbox.scrollHeight;
+
+            // Show typing animation
+            let typingBubble = document.createElement("div");
+            typingBubble.classList.add("message", "bot", "typing");
+            typingBubble.innerHTML = `<img src="logo.png" alt="Electra AI"> <span></span><span></span><span></span>`;
+            chatbox.appendChild(typingBubble);
+            chatbox.scrollTop = chatbox.scrollHeight;
+
+            let apiKey = "AIzaSyC4ayD3GeyuYf7yoev_2Ky4nMNwhnC-EHc"; // Replace with your API key
+
+            let response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ 
+                    contents: [{ parts: [{ text: `Answer in ${selectedLanguage} only: ${userMessage}` }] }],
+                    generationConfig: { temperature: 0.7, topP: 1, maxOutputTokens: 500 }
+                })
+            });
+
+            let data = await response.json();
+            let botReply = "Sorry, I couldn't understand that.";
+
+            if (data && data.candidates && data.candidates.length > 0) {
+                let candidate = data.candidates[0];
+                if (candidate && candidate.content && candidate.content.parts && candidate.content.parts.length > 0) {
+                    botReply = candidate.content.parts[0].text;
+                }
+            }
+
+            botReply = botReply.replace(/Google|Gemini|Alphabet/g, "Mayuk.Dev");
+
+            // Remove typing animation
+            chatbox.removeChild(typingBubble);
+
+            // Add bot response
+            let botBubble = document.createElement("div");
+            botBubble.classList.add("message", "bot");
+            botBubble.innerHTML = `<img src="logo.png" alt="Electra AI"> ${botReply}`;
+            chatbox.appendChild(botBubble);
+
+            document.getElementById("userInput").value = "";
+            chatbox.scrollTop = chatbox.scrollHeight;
+        }
+    </script>
+
+</body>
+</html>

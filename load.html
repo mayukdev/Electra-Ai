@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Electra AI - Loading...</title>
+    <style>
+        /* General Styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #0a0a0a, #121212, #1a1a1a);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            animation: fadeIn 1.5s ease-in-out;
+            overflow: hidden;
+        }
+        /* Fade-in Effect */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        /* Loading Animation */
+        .loading-container {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .ball {
+            width: 20px;
+            height: 20px;
+            background: #007aff;
+            border-radius: 50%;
+            box-shadow: 0 0 15px #007aff;
+            animation: bounce 1.5s infinite ease-in-out, glow 1.5s infinite alternate;
+        }
+        .ball:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        .ball:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        @keyframes glow {
+            from { box-shadow: 0 0 10px #007aff, 0 0 30px #007aff; }
+            to { box-shadow: 0 0 20px #00bfff, 0 0 40px #00bfff; }
+        }
+        /* Title & Text */
+        h1 {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-shadow: 0 0 10px #007aff, 0 0 20px #007aff;
+        }
+        p {
+            font-size: 16px;
+            color: #bbbbbb;
+            margin-top: 10px;
+        }
+        /* Background Animation */
+        .background-glow {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: rgba(0, 122, 255, 0.2);
+            filter: blur(100px);
+            animation: moveGlow 6s infinite alternate ease-in-out;
+        }
+        .background-glow:nth-child(1) {
+            top: 10%;
+            left: 20%;
+        }
+        .background-glow:nth-child(2) {
+            bottom: 15%;
+            right: 25%;
+            animation-delay: 2s;
+        }
+        @keyframes moveGlow {
+            from { transform: translateY(-30px) translateX(-30px); }
+            to { transform: translateY(30px) translateX(30px); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="background-glow"></div>
+    <div class="background-glow"></div>
+
+    <h1>Electra AI is Booting Up...</h1>
+    <div class="loading-container">
+        <div class="ball"></div>
+        <div class="ball"></div>
+        <div class="ball"></div>
+    </div>
+    <p>Initializing advanced AI systems...</p>
+
+    <script>
+        setTimeout(() => {
+            window.location.href = "chat.html";
+        }, 5000); // Redirects after 5 seconds
+    </script>
+
+</body>
+</html>

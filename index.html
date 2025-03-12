@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Electra AI - Next-Gen Knowledge Assistant</title>
+    <style>
+        /* General Styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        body {
+            background: #0d0d0d;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            height: 100vh;
+        }
+        /* Header */
+        #header {
+            width: 100%;
+            max-width: 1200px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+        }
+        #logo {
+            display: flex;
+            align-items: center;
+            font-size: 22px;
+            font-weight: bold;
+        }
+        #logo img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%; /* Makes the logo circular */
+            margin-right: 10px;
+        }
+        /* Menu Button */
+        #menuButton {
+            font-size: 28px;
+            cursor: pointer;
+        }
+        /* Hidden Sidebar Menu */
+        #sidebar {
+            position: fixed;
+            top: 0;
+            right: -250px;
+            width: 250px;
+            height: 100%;
+            background: #1e1e1e;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 50px;
+            transition: right 0.3s ease-in-out;
+        }
+        #sidebar a {
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            padding: 12px;
+            width: 100%;
+            text-align: center;
+            transition: background 0.3s;
+        }
+        #sidebar a:hover {
+            background: #333;
+        }
+        /* Footer inside Sidebar */
+        #sidebarFooter {
+            position: absolute;
+            bottom: 20px;
+            font-size: 14px;
+            color: #888;
+        }
+        /* Close Button */
+        #closeButton {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        /* Hero Section */
+        #hero {
+            margin-top: 50px;
+            max-width: 800px;
+            text-align: center;
+        }
+        #hero h1 {
+            font-size: 42px;
+            font-weight: bold;
+            line-height: 1.2;
+        }
+        #hero p {
+            margin-top: 10px;
+            font-size: 18px;
+            color: #cccccc;
+        }
+        /* CTA Button */
+        #cta {
+            margin-top: 30px;
+            padding: 12px 24px;
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            background: #007aff;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        #cta:hover {
+            background: #005bb5;
+        }
+        /* Features Section */
+        #features {
+            margin-top: 50px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            max-width: 900px;
+        }
+        .feature {
+            background: #1e1e1e;
+            padding: 20px;
+            border-radius: 15px;
+            width: 250px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        .feature:hover {
+            transform: scale(1.05);
+        }
+        .feature img {
+            width: 50px;
+            margin-bottom: 10px;
+        }
+        .feature h3 {
+            font-size: 18px;
+        }
+        .feature p {
+            font-size: 14px;
+            color: #cccccc;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <div id="header">
+        <div id="logo">
+            <img src="logo.png" alt="Electra AI Logo">
+            Electra AI
+        </div>
+        <div id="menuButton" onclick="openSidebar()">☰</div>
+    </div>
+
+    <!-- Sidebar Menu -->
+    <div id="sidebar">
+        <div id="closeButton" onclick="closeSidebar()">✖</div>
+        <a href=".html">Start Chat</a>
+        <a href="about.html">About</a>
+        <a href="report.html">Report</a>
+        <a href="glitch.html">Found Glitch</a>
+        <div id="sidebarFooter">Using © Google API</div>
+    </div>
+
+    <!-- Hero Section -->
+    <div id="hero">
+        <h1>Meet Electra AI – Your Smart Assistant</h1>
+        <p>Unlock the power of AI for knowledge, creativity, and productivity.</p>
+        <button id="cta" onclick="window.location.href='load.html'">Try Electra AI</button>
+    </div>
+
+    <!-- Features Section -->
+    <div id="features">
+        <div class="feature">
+            <img src="brain.png" alt="AI Brain">
+            <h3>Smart AI</h3>
+            <p>Understands and responds intelligently.</p>
+        </div>
+        <div class="feature">
+            <img src="language.png" alt="Multilingual">
+            <h3>Multilingual</h3>
+            <p>Supports multiple languages effortlessly.</p>
+        </div>
+        <div class="feature">
+            <img src="lightning.png" alt="Fast Response">
+            <h3>Lightning Fast</h3>
+            <p>Get answers instantly with speed.</p>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        function openSidebar() {
+            document.getElementById("sidebar").style.right = "0";
+        }
+
+        function closeSidebar() {
+            document.getElementById("sidebar").style.right = "-250px";
+        }
+    </script>
+
+</body>
+</html>
